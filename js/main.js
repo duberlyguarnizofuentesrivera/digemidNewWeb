@@ -1,21 +1,29 @@
 $(function () {
+    const spinner_div = $("#spinner_div")
+    const search_glass = $("#svg_search_img")
+    const show_results_button = $("#show_results_button")
+    const suggestion_list = $("#suggestions_list");
+    show_results_button.hide()
+    spinner_div.hide()
+
     //const table_modal = new bootstrap.Modal($('#table_results_modal'));
     function titleCase(str) {
         return str.replace(
             /\w\S*/g,
-            function(txt) {
+            function (txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
             }
         );
     }
 
-    const suggestion_list = $("#suggestions_list");
+
     $("#search_box").on("paste keyup", function () {
         const text = $(this).val();
         if (this.value.length < 3) {
             suggestion_list.empty();
             suggestion_list.append("<li>Ingresa un medicamento...</li>");
         } else {
+
             const search_results = request(text)
                 .then(result => result.json())
                 .then(element => processResults(element));
@@ -23,7 +31,10 @@ $(function () {
     });
 
     const request = async (text) => {
-        //console.log("making request");
+        search_glass.hide()
+        spinner_div.show()
+        show_results_button.hide()
+        const t1 = performance.now();
         const response = await fetch("https://cors-anywhere.herokuapp.com/http://observatorio.digemid.minsa.gob.pe/default.aspx/GetMedicamentos", {
             headers: {
                 "Content-Type": " application/json"
@@ -34,6 +45,14 @@ $(function () {
         if (!response.ok)
             throw new Error("Error with request", response.status);
         //const data = await response.json();
+        spinner_div.hide()
+        search_glass.show()
+        const t2 = performance.now();
+        if (t2 - t1 > 100) {
+            console.log("SLOW NETWORK!")
+        }
+        console.log(t1);
+        console.log(t2 - t1);
         return response;
     }
 
@@ -83,9 +102,9 @@ $(function () {
         //todo: poner fecha de actualización natural (hace 3 dias, etc)
         for (let element in list.aaData) {
             let el = list.aaData[element]
-            $("tbody").append("<tr><td>" + titleCase(el[1]) + "</td><td>" + el[2].split(" ")[0] + "</td><td>" + el[3] + "</td><td>" + titleCase(el[4]) + "</td><td>" + titleCase(el[6]) + "</td><td>" + el[7] + "</td><td>Detalle</td></tr>")
+            $("tbody").append("<tr><td>" + el[2].split(" ")[0] + "</td><td>" + el[3] + "</td><td>" + titleCase(el[4]) + "</td><td>" + titleCase(el[6]) + "</td><td>" + el[7] + "</td><td>Detalle</td></tr>")
         }
-        //table_modal.show();
+        show_results_button.show()
     }
 
     $("ul").on("mousedown", "a", function (event) {

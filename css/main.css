@@ -238,7 +238,8 @@ body {
     margin: 0;
 }
 .content_wrapper{
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url("../img/fondo1.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url("../img/fondo1.jpg") fixed center no-repeat;
+    background-size: cover;
 }
 /**
  * Add the correct display in IE 9-.
