@@ -99,7 +99,7 @@ $(function () {
     function populateTable(list) {
         console.log("populateTable started")
         console.log(list)
-        //todo: poner fecha de actualización natural (hace 3 dias, etc)
+        //  todo: poner fecha de actualización natural (hace 3 dias, etc)
         for (let element in list.aaData) {
             let el = list.aaData[element]
             $("tbody").append("<tr><td>" + el[2].split(" ")[0] + "</td><td>" + el[3] + "</td><td>" + titleCase(el[4]) + "</td><td>" + titleCase(el[6]) + "</td><td>" + el[7] + "</td><td>Detalle</td></tr>")
