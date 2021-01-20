@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -6,6 +7,7 @@
     <meta name="author" content="colorlib.com">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet"/>
     <link href="css/main.css" rel="stylesheet"/>
+    <!--    todo: modificar versión de bootstrap para actuar acorde  con nuevo tema instalado: https://bootswatch.com/lux/ -->
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/sugar.min.js"></script>
@@ -15,10 +17,11 @@
 </head>
 <body>
 <div class="content_wrapper">
+
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Observatorio Digemid</a>
+                <a class="navbar-brand" href="#">Observatorio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,13 +46,19 @@
         </nav>
     </div>
     <div class="search_form_container">
-        <form class="search" method="post" action="index.html">
+
+        <form class="search" method="post" action="index.html" id="search_form">
+
             <fieldset>
-                <legend>¿Que medicina estás buscando?</legend>
+                <legend>¿Que medicina buscas?</legend>
+
                 <div class="inner-form">
                     <div class="input-field">
-                        <button class="btn-search" type="button"><div id="spinner_div" class="spinner-border text-secondary spinner-border-lg" role="status"></div>
-                            <svg id="svg_search_img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <button class="btn-search" type="button"><span id="spinner_div"
+                                                                       class="spinner-border text-secondary spinner-border-lg"
+                                                                       role="status"></span>
+                            <svg id="svg_search_img" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 viewBox="0 0 24 24">
                                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                             </svg>
                         </button>
@@ -68,9 +77,11 @@
                     <span>Privados</span>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <!--  todo: desabilitar botón mientras se carga resultado, mostrar feedback, y si tarda más de X segundos, informar de red lenta-->
-                    <button id="show_results_button" type="button" class="btn btn-outline-light btn-lg rounded-pill" data-bs-toggle="modal" data-bs-target="#table_results_modal">
-                        Mostrar Resultados</button>
+                    <!--  todo: si tarda más de X segundos, informar de red lenta-->
+                    <button id="show_results_button" type="button" class="btn btn-outline-light"
+                            data-bs-toggle="modal" data-bs-target="#table_results_modal">
+                        Mostrar Resultados
+                    </button>
                 </div>
             </fieldset>
         </form>
@@ -82,21 +93,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Resultados</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div id="results_table" class="card-body table-responsive">
-                        <table class="table table-striped  caption-top ">
-                            <caption>click en la X, afuera, o presiona ESC para cerrar</caption>
+                        <table class="table table-striped  caption-top table-bordered table-sm align-middle">
+                            <caption>Click en la X, afuera, o presiona ESC para cerrar</caption>
                             <thead class="table-dark">
-                            <tr>
-<!--                            <th scope="col">Tipo Estab.</th>-->
-                            <th scope="col">Actualizado</th>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Laboratorio</th>
-                            <th scope="col">Farmacia</th>
-                            <th scope="col">Precio Unit.</th>
-                            <th scope="col">Detalle</th>
+                            <tr class="align-middle">
+                                <!--                            <th scope="col">Tipo Estab.</th>-->
+                                <!-- todo: mostrar indicación visual sobre esto -->
+                                <th scope="col">Actualizado</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Laboratorio</th>
+                                <th scope="col">Farmacia</th>
+                                <th scope="col">Precio Unit.</th>
+                                <th scope="col">Detalle</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -111,7 +123,7 @@
         </div>
     </div>
 
-
 </div>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</body>
 </html>
