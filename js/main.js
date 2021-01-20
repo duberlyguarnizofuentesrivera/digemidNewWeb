@@ -1,4 +1,5 @@
 $(function () {
+
     const spinner_div = $("#spinner_div")
     const search_glass = $("#svg_search_img")
     const show_results_button = $("#show_results_button")
@@ -13,6 +14,7 @@ $(function () {
         "            </div>"
     show_results_button.hide()
     spinner_div.hide()
+    Sugar.Date.extend();
 
     // slow_network_warning.hide()
     function titleCase(str) {
@@ -55,7 +57,7 @@ $(function () {
         spinner_div.hide()
         search_glass.show()
         const t2 = performance.now();
-        if (t2 - t1 > 1000) {
+        if (t2 - t1 > 3000) {
             console.log("SLOW NETWORK!")
             //todo: verificar que solo se muestre una vez, y no una vez para cada carácter
             search_form.prepend(slow_network_div)
@@ -111,15 +113,19 @@ $(function () {
         //  todo: poner fecha de actualización natural (hace 3 dias, etc)
         for (let element in list.aaData) {
             let el = list.aaData[element]
+            // Pharmacy name line breaking if name is too long...
             if (el[6].length >= 30) {
                 let pharmacy_line_break = el[6].indexOf(" ", 29)
                 el[6] = el[6].substring(0, pharmacy_line_break) + "<br>" + el[6].substring(pharmacy_line_break + 1)
                 if (el[6].substring(0, 4) === "<br>") {
                     el[6] = el[6].substring(4)
                 }
-                console.log(el[6])
+                // console.log(el[6])
             }
-            $("tbody").append("<tr><td>" + el[2].split(" ")[0] + "</td><td>" + el[3] + "</td><td>" + titleCase(el[4]) + "</td><td>" + titleCase(el[6]) + "</td><td>" + el[7] + "</td><td>Detalle</td></tr>")
+            // Date as natural language
+
+            let relative_date = new Sugar.Date.create(el[2].split(" ")[0], "es").relative("es")
+            $("tbody").append("<tr><td>" + relative_date + "</td><td>" + el[3] + "</td><td>" + titleCase(el[4]) + "</td><td>" + titleCase(el[6]) + "</td><td class='text-center'>" + el[7] + "</td><td>Detalle</td></tr>")
         }
         show_results_button.show()
     }

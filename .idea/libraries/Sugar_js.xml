@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Sugar.js" type="javaScript">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/js/sugar-custom.min.js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
